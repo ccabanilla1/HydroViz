@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'screens/communityhome.dart';
+import 'screens/error404.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,8 +24,8 @@ class MainScreen extends StatelessWidget {
         children: [
           // Top Blue Bar
           Container(
-            color: Color(0xFF93C6E0), // Light blue color
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            color: const Color(0xFF93C6E0), // Light blue color
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             height: 80,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,8 +37,8 @@ class MainScreen extends StatelessWidget {
                       height: 40,
                       width: 40,
                     ),
-                    SizedBox(width: 16),
-                    Text(
+                    const SizedBox(width: 16),
+                    const Text(
                       'HydroViz',
                       style: TextStyle(
                         fontSize: 20,
@@ -50,12 +52,12 @@ class MainScreen extends StatelessWidget {
                 Container(
                   width: 400,
                   height: 40,
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(Icons.search, color: Colors.black54),
                       SizedBox(width: 8),
@@ -80,7 +82,7 @@ class MainScreen extends StatelessWidget {
                 // Sidebar
                 Container(
                   width: 80,
-                  color: Color(0xFF93C6E0), // Light blue color
+                  color: const Color(0xFF93C6E0), // Light blue color
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -89,30 +91,54 @@ class MainScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             IconButton(
-                              icon: Icon(Icons.dashboard,
+                              icon: const Icon(Icons.dashboard,
                                   size: 30, color: Colors.black),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Error404()),
+                                );
+                              },
                             ),
                             IconButton(
-                              icon: Icon(Icons.people,
+                              icon: const Icon(Icons.people,
                                   size: 30, color: Colors.black),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Communityhome()),
+                                );
+                              },
                             ),
                             IconButton(
-                              icon: Icon(Icons.search,
+                              icon: const Icon(Icons.search,
                                   size: 30, color: Colors.black),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Error404()),
+                                );
+                              },
                             ),
                             IconButton(
-                              icon: Icon(Icons.settings,
+                              icon: const Icon(Icons.settings,
                                   size: 30, color: Colors.black),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Error404()),
+                                );
+                              },
                             ),
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 16.0),
                         child: CircleAvatar(
                           backgroundImage: AssetImage(
                               'assets/profile.png'), // Replace with profile image
@@ -131,29 +157,30 @@ class MainScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Start Section
-                        Text(
+                        const Text(
                           'Start',
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Column(
                           children: [
                             TextButton.icon(
                               onPressed: () {},
-                              icon: Icon(Icons.add_circle, color: Colors.green),
-                              label: Text(
+                              icon: const Icon(Icons.add_circle,
+                                  color: Colors.green),
+                              label: const Text(
                                 'New Project...',
                                 style: TextStyle(
                                     color: Colors.green, fontSize: 16),
                               ),
                             ),
-                            SizedBox(width: 16),
+                            const SizedBox(width: 16),
                             TextButton.icon(
                               onPressed: () {},
-                              icon:
-                                  Icon(Icons.folder_open, color: Colors.green),
-                              label: Text(
+                              icon: const Icon(Icons.folder_open,
+                                  color: Colors.green),
+                              label: const Text(
                                 'Open...',
                                 style: TextStyle(
                                     color: Colors.green, fontSize: 16),
@@ -161,15 +188,15 @@ class MainScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: 30),
+                        const SizedBox(height: 30),
                         // Recent Section
-                        Text(
+                        const Text(
                           'Recent',
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 10),
-                        Column(
+                        const SizedBox(height: 10),
+                        const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('Project Example',
@@ -191,16 +218,16 @@ class MainScreen extends StatelessWidget {
                 Container(
                   width: 300,
                   color: Colors.grey[200],
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Walkthroughs',
                         style: TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       walkthroughTile(),
                       walkthroughTile(),
                       walkthroughTile(),
@@ -219,12 +246,12 @@ class MainScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.grey[400],
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Column(
+        child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
