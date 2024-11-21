@@ -1,0 +1,37 @@
+Date : 2024-11-20 00:44:19
+Directory : c:\Users\heath\HydroViz\hydroviz\lib
+Total : 8 files,  497 codes, 4 comments, 45 blanks, all 546 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Dart     |          8 |        497 |          4 |         45 |        546 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                 | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                    |          8 |        497 |          4 |         45 |        546 |
+| . (Files)                                                            |          1 |         20 |          0 |          3 |         23 |
+| models                                                               |          3 |         85 |          0 |          8 |         93 |
+| screens                                                              |          1 |        182 |          1 |          6 |        189 |
+| services                                                             |          1 |         91 |          3 |         17 |        111 |
+| widgets                                                              |          2 |        119 |          0 |         11 |        130 |
++----------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                             | language | code       | comment    | blank      | total      |
++----------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\heath\HydroViz\hydroviz\lib\main.dart                       | Dart     |         20 |          0 |          3 |         23 |
+| c:\Users\heath\HydroViz\hydroviz\lib\models\hydro_component.dart     | Dart     |         21 |          0 |          4 |         25 |
+| c:\Users\heath\HydroViz\hydroviz\lib\models\project.dart             | Dart     |         29 |          0 |          2 |         31 |
+| c:\Users\heath\HydroViz\hydroviz\lib\models\well.dart                | Dart     |         35 |          0 |          2 |         37 |
+| c:\Users\heath\HydroViz\hydroviz\lib\screens\modeling_interface.dart | Dart     |        182 |          1 |          6 |        189 |
+| c:\Users\heath\HydroViz\hydroviz\lib\services\api_service.dart       | Dart     |         91 |          3 |         17 |        111 |
+| c:\Users\heath\HydroViz\hydroviz\lib\widgets\component_palette.dart  | Dart     |         93 |          0 |          6 |         99 |
+| c:\Users\heath\HydroViz\hydroviz\lib\widgets\grid_painter.dart       | Dart     |         26 |          0 |          5 |         31 |
+| Total                                                                |          |        497 |          4 |         45 |        546 |
++----------------------------------------------------------------------+----------+------------+------------+------------+------------+

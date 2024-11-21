@@ -1,0 +1,10 @@
+"filename", "language", "Dart", "comment", "blank", "total"
+"c:\Users\heath\HydroViz\hydroviz\lib\main.dart", "Dart", 20, 0, 3, 23
+"c:\Users\heath\HydroViz\hydroviz\lib\models\hydro_component.dart", "Dart", 21, 0, 4, 25
+"c:\Users\heath\HydroViz\hydroviz\lib\models\project.dart", "Dart", 29, 0, 2, 31
+"c:\Users\heath\HydroViz\hydroviz\lib\models\well.dart", "Dart", 35, 0, 2, 37
+"c:\Users\heath\HydroViz\hydroviz\lib\screens\modeling_interface.dart", "Dart", 182, 1, 6, 189
+"c:\Users\heath\HydroViz\hydroviz\lib\services\api_service.dart", "Dart", 91, 3, 17, 111
+"c:\Users\heath\HydroViz\hydroviz\lib\widgets\component_palette.dart", "Dart", 93, 0, 6, 99
+"c:\Users\heath\HydroViz\hydroviz\lib\widgets\grid_painter.dart", "Dart", 26, 0, 5, 31
+"Total", "-", 497, 4, 45, 546
