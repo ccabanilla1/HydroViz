@@ -1,0 +1,29 @@
+"filename", "language", "Ignore", "Python", "pip requirements", "Docker", "YAML", "comment", "blank", "total"
+"c:\Users\heath\HydroViz\hydroviz_backend\.dockerignore", "Ignore", 10, 0, 0, 0, 0, 0, 0, 10
+"c:\Users\heath\HydroViz\hydroviz_backend\Dockerfile", "Docker", 0, 0, 0, 9, 0, 0, 5, 14
+"c:\Users\heath\HydroViz\hydroviz_backend\docker-compose.yml", "YAML", 0, 0, 0, 0, 25, 0, 2, 27
+"c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\admin.py", "Python", 0, 30, 0, 0, 0, 6, 6, 42
+"c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\apps.py", "Python", 0, 4, 0, 0, 0, 0, 1, 5
+"c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\migrations\0001_initial.py", "Python", 0, 147, 0, 0, 0, 1, 7, 155
+"c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\migrations\__init__.py", "Python", 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\models\__init__.py", "Python", 0, 10, 0, 0, 0, 0, 2, 12
+"c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\models\physical_models.py", "Python", 0, 83, 0, 0, 0, 12, 19, 114
+"c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\models\simulation_models.py", "Python", 0, 48, 0, 0, 0, 7, 10, 65
+"c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\serializers\__init__.py", "Python", 0, 24, 0, 0, 0, 0, 3, 27
+"c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\serializers\physical_serializers.py", "Python", 0, 44, 0, 0, 0, 12, 9, 65
+"c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\serializers\simulation_serializers.py", "Python", 0, 29, 0, 0, 0, 7, 5, 41
+"c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\services\simulation_engine.py", "Python", 0, 188, 0, 0, 0, 12, 24, 224
+"c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\services\visualization_helpers.py", "Python", 0, 134, 0, 0, 0, 5, 27, 166
+"c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\tests.py", "Python", 0, 1, 0, 0, 0, 1, 2, 4
+"c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\urls.py", "Python", 0, 16, 0, 0, 0, 7, 4, 27
+"c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\views\__init__.py", "Python", 0, 20, 0, 0, 0, 0, 1, 21
+"c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\views\physical_views.py", "Python", 0, 36, 0, 0, 0, 5, 9, 50
+"c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\views\simulation_views.py", "Python", 0, 127, 0, 0, 0, 13, 27, 167
+"c:\Users\heath\HydroViz\hydroviz_backend\hydroviz\__init__.py", "Python", 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\heath\HydroViz\hydroviz_backend\hydroviz\asgi.py", "Python", 0, 10, 0, 0, 0, 0, 7, 17
+"c:\Users\heath\HydroViz\hydroviz_backend\hydroviz\settings.py", "Python", 0, 91, 0, 0, 0, 18, 17, 126
+"c:\Users\heath\HydroViz\hydroviz_backend\hydroviz\urls.py", "Python", 0, 27, 0, 0, 0, 8, 5, 40
+"c:\Users\heath\HydroViz\hydroviz_backend\hydroviz\wsgi.py", "Python", 0, 10, 0, 0, 0, 0, 7, 17
+"c:\Users\heath\HydroViz\hydroviz_backend\manage.py", "Python", 0, 17, 0, 0, 0, 1, 4, 22
+"c:\Users\heath\HydroViz\hydroviz_backend\requirements.txt", "pip requirements", 0, 0, 11, 0, 0, 0, 0, 11
+"Total", "-", 10, 1096, 11, 9, 25, 115, 205, 1471
