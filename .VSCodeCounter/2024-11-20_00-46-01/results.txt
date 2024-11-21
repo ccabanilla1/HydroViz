@@ -1,0 +1,63 @@
+Date : 2024-11-20 00:46:01
+Directory : c:\Users\heath\HydroViz\hydroviz_backend
+Total : 26 files,  810 codes, 36 comments, 142 blanks, all 988 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| Python           |         22 |        758 |         36 |        135 |        929 |
+| YAML             |          1 |         25 |          0 |          2 |         27 |
+| Ignore           |          1 |         10 |          0 |          0 |         10 |
+| Docker           |          1 |          9 |          0 |          5 |         14 |
+| pip requirements |          1 |          8 |          0 |          0 |          8 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                     | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                        |         26 |        810 |         36 |        142 |        988 |
+| . (Files)                                                                                |          5 |         69 |          1 |         11 |         81 |
+| hydro_sim                                                                                |         16 |        603 |         16 |         94 |        713 |
+| hydro_sim (Files)                                                                        |          4 |         51 |          5 |         13 |         69 |
+| hydro_sim\migrations                                                                     |          2 |        147 |          1 |          8 |        156 |
+| hydro_sim\models                                                                         |          3 |        147 |          0 |         27 |        174 |
+| hydro_sim\serializers                                                                    |          3 |         97 |          0 |         18 |        115 |
+| hydro_sim\services                                                                       |          1 |         61 |          8 |          6 |         75 |
+| hydro_sim\views                                                                          |          3 |        100 |          2 |         22 |        124 |
+| hydroviz                                                                                 |          5 |        138 |         19 |         37 |        194 |
++------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                                                 | language         | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| c:\Users\heath\HydroViz\hydroviz_backend\.dockerignore                                   | Ignore           |         10 |          0 |          0 |         10 |
+| c:\Users\heath\HydroViz\hydroviz_backend\Dockerfile                                      | Docker           |          9 |          0 |          5 |         14 |
+| c:\Users\heath\HydroViz\hydroviz_backend\docker-compose.yml                              | YAML             |         25 |          0 |          2 |         27 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\admin.py                              | Python           |         30 |          0 |          6 |         36 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\apps.py                               | Python           |          4 |          0 |          1 |          5 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\migrations\0001_initial.py            | Python           |        147 |          1 |          7 |        155 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\migrations\__init__.py                | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\models\__init__.py                    | Python           |         10 |          0 |          2 |         12 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\models\physical_models.py             | Python           |         85 |          0 |         15 |        100 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\models\simulation_models.py           | Python           |         52 |          0 |         10 |         62 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\serializers\__init__.py               | Python           |         24 |          0 |          3 |         27 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\serializers\physical_serializers.py   | Python           |         44 |          0 |         10 |         54 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\serializers\simulation_serializers.py | Python           |         29 |          0 |          5 |         34 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\services\simulation_engine.py         | Python           |         61 |          8 |          6 |         75 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\tests.py                              | Python           |          1 |          1 |          2 |          4 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\urls.py                               | Python           |         16 |          4 |          4 |         24 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\views\__init__.py                     | Python           |         20 |          0 |          1 |         21 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\views\physical_views.py               | Python           |         36 |          0 |          9 |         45 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydro_sim\views\simulation_views.py             | Python           |         44 |          2 |         12 |         58 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydroviz\__init__.py                            | Python           |          0 |          0 |          1 |          1 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydroviz\asgi.py                                | Python           |         10 |          0 |          7 |         17 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydroviz\settings.py                            | Python           |         91 |         12 |         17 |        120 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydroviz\urls.py                                | Python           |         27 |          7 |          5 |         39 |
+| c:\Users\heath\HydroViz\hydroviz_backend\hydroviz\wsgi.py                                | Python           |         10 |          0 |          7 |         17 |
+| c:\Users\heath\HydroViz\hydroviz_backend\manage.py                                       | Python           |         17 |          1 |          4 |         22 |
+| c:\Users\heath\HydroViz\hydroviz_backend\requirements.txt                                | pip requirements |          8 |          0 |          0 |          8 |
+| Total                                                                                    |                  |        810 |         36 |        142 |        988 |
++------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
