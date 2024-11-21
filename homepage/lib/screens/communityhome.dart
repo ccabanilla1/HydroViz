@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:homepage/main.dart';
+import 'package:homepage/screens/discussion.dart';
 
 void main() => runApp(HydroVizApp());
 
@@ -43,7 +45,11 @@ class Communityhome extends StatelessWidget {
                     icon: Icons.home,
                     title: "Home",
                     onTap: () {
-                      // Add navigation functionality here
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Communityhome()),
+                      );
                     },
                   ),
                   SidebarItem(
@@ -109,7 +115,11 @@ class Communityhome extends StatelessWidget {
                         IconButton(
                           icon: Icon(Icons.arrow_back),
                           onPressed: () {
-                            // Add back navigation logic here
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MainScreen()),
+                            );
                           },
                         ),
                         // Search Bar
@@ -292,11 +302,19 @@ class SidebarTextLink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      "- $title",
-      style: const TextStyle(
-        color: Colors.white,
-        fontSize: 14,
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DiscussionPage()),
+        );
+      },
+      child: Text(
+        "- $title",
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 14,
+        ),
       ),
     );
   }
@@ -305,56 +323,64 @@ class SidebarTextLink extends StatelessWidget {
 class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              CircleAvatar(
-                radius: 20,
-                backgroundColor: Colors.grey,
-                child: Icon(Icons.person, color: Colors.white),
-              ),
-              SizedBox(width: 8),
-              Text(
-                "Discussion Title",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          SizedBox(height: 8),
-          Text(
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-          ),
-          SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Icon(Icons.favorite, color: Colors.green),
-                  SizedBox(width: 4),
-                  Text("321 Likes"),
-                ],
-              ),
-              Row(
-                children: [
-                  Icon(Icons.comment, color: Colors.grey),
-                  SizedBox(width: 4),
-                  Text("20 comments"),
-                ],
-              ),
-              Icon(Icons.share, color: Colors.green),
-            ],
-          ),
-        ],
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DiscussionPage()),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.grey,
+                  child: Icon(Icons.person, color: Colors.white),
+                ),
+                SizedBox(width: 8),
+                Text(
+                  "Discussion Title",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(height: 8),
+            Text(
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            ),
+            SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Icon(Icons.favorite, color: Colors.green),
+                    SizedBox(width: 4),
+                    Text("321 Likes"),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.comment, color: Colors.grey),
+                    SizedBox(width: 4),
+                    Text("20 comments"),
+                  ],
+                ),
+                Icon(Icons.share, color: Colors.green),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

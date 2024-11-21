@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homepage/screens/communityhome.dart';
 
 void main() => runApp(HydroVizApp());
 
@@ -7,12 +8,12 @@ class HydroVizApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: DiscussionPage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class DiscussionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +43,13 @@ class HomePage extends StatelessWidget {
                   SidebarItem(
                     icon: Icons.home,
                     title: "Home",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Communityhome()),
+                      );
+                    },
                   ),
                   SidebarItem(
                     icon: Icons.topic,
@@ -100,7 +107,13 @@ class HomePage extends StatelessWidget {
                         // Back Arrow
                         IconButton(
                           icon: const Icon(Icons.arrow_back),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Communityhome()),
+                            );
+                          },
                         ),
                         // Search Bar
                         Container(
@@ -229,11 +242,19 @@ class SidebarTextLink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      "- $title",
-      style: const TextStyle(
-        color: Colors.white,
-        fontSize: 14,
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DiscussionPage()),
+        );
+      },
+      child: Text(
+        "- $title",
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 14,
+        ),
       ),
     );
   }
