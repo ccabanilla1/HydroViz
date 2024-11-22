@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homepage/screens/communityhome.dart';
+import 'package:homepage/screens/settings_community.dart';
 
 void main() => runApp(HydroVizApp());
 
@@ -136,22 +137,64 @@ class DiscussionPage extends StatelessWidget {
                           ),
                         ),
                         // User Profile
-                        const Row(
-                          children: [
-                            Text(
-                              "FirstName LastName",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
+                        DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            icon: const Row(
+                              children: [
+                                Text(
+                                  "FirstName LastName",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                SizedBox(width: 8),
+                                CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: Colors.grey,
+                                  child:
+                                      Icon(Icons.person, color: Colors.white),
+                                ),
+                                Icon(
+                                  Icons.arrow_drop_down,
+                                  color: Colors.black,
+                                ),
+                              ],
+                            ),
+                            items: const [
+                              DropdownMenuItem(
+                                value: "settings",
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.settings, size: 18),
+                                    SizedBox(width: 8),
+                                    Text("Settings"),
+                                  ],
+                                ),
                               ),
-                            ),
-                            SizedBox(width: 8),
-                            CircleAvatar(
-                              radius: 20,
-                              backgroundColor: Colors.grey,
-                              child: Icon(Icons.person, color: Colors.white),
-                            ),
-                          ],
+                              DropdownMenuItem(
+                                value: "logout",
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.logout, size: 18),
+                                    SizedBox(width: 8),
+                                    Text("Logout"),
+                                  ],
+                                ),
+                              ),
+                            ],
+                            onChanged: (value) {
+                              if (value == "settings") {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CSettingsPage()),
+                                );
+                              } else if (value == "logout") {
+                                // Add logout logic
+                              }
+                            },
+                          ),
                         ),
                       ],
                     ),

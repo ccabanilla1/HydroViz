@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:homepage/screens/communityhome.dart';
+import 'package:homepage/screens/error404.dart';
+import 'package:homepage/screens/discussion.dart';
 
 void main() => runApp(HydroVizApp());
 
@@ -7,12 +10,12 @@ class HydroVizApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SettingsPage(),
+      home: CSettingsPage(),
     );
   }
 }
 
-class SettingsPage extends StatelessWidget {
+class CSettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,17 +45,33 @@ class SettingsPage extends StatelessWidget {
                   SidebarItem(
                     icon: Icons.home,
                     title: "Home",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Communityhome()),
+                      );
+                    },
                   ),
                   SidebarItem(
                     icon: Icons.topic,
                     title: "Topics",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Error404()),
+                      );
+                    },
                   ),
                   SidebarItem(
                     icon: Icons.trending_up,
                     title: "Trending",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Error404()),
+                      );
+                    },
                   ),
                   const SizedBox(height: 32),
                   // Recent Discussions
@@ -100,7 +119,9 @@ class SettingsPage extends StatelessWidget {
                         // Back Arrow
                         IconButton(
                           icon: Icon(Icons.arrow_back),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                         ),
                         // Search Bar
                         Container(

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:homepage/main.dart';
 import 'package:homepage/screens/discussion.dart';
+import 'package:homepage/screens/error404.dart';
+import 'package:homepage/screens/settings_community.dart';
+import 'package:homepage/widgets/post_card.dart'; // Assuming this is where PostCard is defined
 
 void main() => runApp(HydroVizApp());
 
@@ -14,17 +17,83 @@ class HydroVizApp extends StatelessWidget {
   }
 }
 
+class SidebarItem extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final VoidCallback? onTap;
+  final Color? iconColor;
+  final TextStyle? textStyle;
+
+  const SidebarItem({
+    Key? key,
+    required this.icon,
+    required this.title,
+    this.onTap,
+    this.iconColor = Colors.white,
+    this.textStyle = const TextStyle(color: Colors.white, fontSize: 16),
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      label: "Sidebar item: $title",
+      button: true,
+      child: InkWell(
+        onTap: onTap ?? () {}, // Default to no-op if onTap is null
+        splashColor: Colors.grey.withOpacity(0.3), // Ripple effect
+        highlightColor: Colors.grey.withOpacity(0.1), // Pressed color
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Row(
+            children: [
+              Icon(icon, color: iconColor),
+              const SizedBox(width: 16),
+              Text(title, style: textStyle),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SidebarTextLink extends StatelessWidget {
+  final String title;
+  final VoidCallback? onTap; // Optional custom action
+
+  const SidebarTextLink({Key? key, required this.title, this.onTap})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap ??
+          () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DiscussionPage()),
+            );
+          },
+      splashColor: Colors.grey.withOpacity(0.3), // Add ripple effect
+      child: Text(
+        "- $title",
+        style: const TextStyle(color: Colors.white, fontSize: 14),
+      ),
+    );
+  }
+}
+
 class Communityhome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF7EDE4), // Light beige background
+      backgroundColor: const Color(0xFFF7EDE4), // Light beige background
       body: Row(
         children: [
           // Sidebar
           Container(
             width: 250,
-            color: Color(0xFF6C92BF), // Blue sidebar
+            color: const Color(0xFF6C92BF), // Blue sidebar
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -56,14 +125,20 @@ class Communityhome extends StatelessWidget {
                     icon: Icons.topic,
                     title: "Topics",
                     onTap: () {
-                      // Add navigation functionality here
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Error404()),
+                      );
                     },
                   ),
                   SidebarItem(
                     icon: Icons.trending_up,
                     title: "Trending",
                     onTap: () {
-                      // Add navigation functionality here
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Error404()),
+                      );
                     },
                   ),
                   const SizedBox(height: 32),
@@ -113,7 +188,7 @@ class Communityhome extends StatelessWidget {
                       children: [
                         // Back Arrow
                         IconButton(
-                          icon: Icon(Icons.arrow_back),
+                          icon: const Icon(Icons.arrow_back),
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -142,29 +217,70 @@ class Communityhome extends StatelessWidget {
                             ],
                           ),
                         ),
-                        // User Profile
-                        const Row(
-                          children: [
-                            Text(
-                              "FirstName LastName",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
+                        // User Profile with Dropdown
+                        DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            icon: const Row(
+                              children: [
+                                Text(
+                                  "FirstName LastName",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                SizedBox(width: 8),
+                                CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: Colors.grey,
+                                  child:
+                                      Icon(Icons.person, color: Colors.white),
+                                ),
+                                Icon(
+                                  Icons.arrow_drop_down,
+                                  color: Colors.black,
+                                ),
+                              ],
+                            ),
+                            items: const [
+                              DropdownMenuItem(
+                                value: "settings",
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.settings, size: 18),
+                                    SizedBox(width: 8),
+                                    Text("Settings"),
+                                  ],
+                                ),
                               ),
-                            ),
-                            SizedBox(width: 8),
-                            CircleAvatar(
-                              radius: 20,
-                              backgroundColor:
-                                  Colors.grey, // Placeholder avatar
-                              child: Icon(Icons.person, color: Colors.white),
-                            ),
-                          ],
+                              DropdownMenuItem(
+                                value: "logout",
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.logout, size: 18),
+                                    SizedBox(width: 8),
+                                    Text("Logout"),
+                                  ],
+                                ),
+                              ),
+                            ],
+                            onChanged: (value) {
+                              if (value == "settings") {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CSettingsPage()),
+                                );
+                              } else if (value == "logout") {
+                                // Add logout logic
+                              }
+                            },
+                          ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 16),
-                    // Create Post
+                    // Create Post Section
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
@@ -215,10 +331,25 @@ class Communityhome extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    // Posts
-                    PostCard(),
-                    PostCard(),
-                    PostCard(),
+                    // Posts Section
+                    const PostCard(
+                      title: "Discussion Title 1",
+                      description: "Lorem Ipsum is simply dummy text.",
+                      likes: 321,
+                      comments: 20,
+                    ),
+                    const PostCard(
+                      title: "Discussion Title 2",
+                      description: "Lorem Ipsum is industry dummy text.",
+                      likes: 150,
+                      comments: 12,
+                    ),
+                    const PostCard(
+                      title: "Discussion Title 3",
+                      description: "Dummy text used in the printing industry.",
+                      likes: 200,
+                      comments: 18,
+                    ),
                   ],
                 ),
               ),
@@ -260,155 +391,6 @@ class Communityhome extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class SidebarItem extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final VoidCallback? onTap;
-
-  SidebarItem({required this.icon, required this.title, this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Row(
-          children: [
-            Icon(icon, color: Colors.white),
-            const SizedBox(width: 16),
-            Text(
-              title,
-              style: const TextStyle(color: Colors.white, fontSize: 16),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class SidebarTextLink extends StatelessWidget {
-  final String title;
-
-  SidebarTextLink({required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => DiscussionPage()),
-        );
-      },
-      child: Text(
-        "- $title",
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 14,
-        ),
-      ),
-    );
-  }
-}
-
-class PostCard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => DiscussionPage()),
-        );
-      },
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 16),
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.grey,
-                  child: Icon(Icons.person, color: Colors.white),
-                ),
-                SizedBox(width: 8),
-                Text(
-                  "Discussion Title",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(height: 8),
-            Text(
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            ),
-            SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Icon(Icons.favorite, color: Colors.green),
-                    SizedBox(width: 4),
-                    Text("321 Likes"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(Icons.comment, color: Colors.grey),
-                    SizedBox(width: 4),
-                    Text("20 comments"),
-                  ],
-                ),
-                Icon(Icons.share, color: Colors.green),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class UpdateNote extends StatelessWidget {
-  final String title;
-  final String description;
-
-  UpdateNote({required this.title, required this.description});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(
-            description,
-            style: const TextStyle(fontSize: 12, color: Colors.grey),
           ),
         ],
       ),
