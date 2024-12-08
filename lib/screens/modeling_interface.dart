@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 import '../models/hydro_component.dart';
-import '../models/placed_component.dart' as pc;  // Changed prefix to shorter name
+import '../models/placed_component.dart' as pc;  // Using prefix to avoid naming conflicts
+import '../services/api_service.dart';
 import '../widgets/component_palette.dart';
 import '../widgets/grid_painter.dart';
 
@@ -13,6 +15,10 @@ class ModelingInterface extends StatefulWidget {
 }
 
 class _ModelingInterfaceState extends State<ModelingInterface> {
+  // Services and utilities
+  final ApiService _apiService = ApiService();
+  final _logger = Logger('ModelingInterface');
+  
   // List to track all components placed on the workspace
   final List<pc.PlacedComponent> _placedComponents = [];
   
@@ -43,6 +49,101 @@ class _ModelingInterfaceState extends State<ModelingInterface> {
       description: 'No-flow boundary',
     ),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadComponents();  // Load existing components when screen initializes
+  }
+
+  // Fetches existing components from the backend
+  Future<void> _loadComponents() async {
+    try {
+      final components = await _apiService.getComponents();
+      setState(() {
+        _placedComponents.clear();
+        for (var comp in components) {
+          _placedComponents.add(pc.PlacedComponent(
+            component: _findComponentByName(comp['type']),
+            offset: Offset(comp['location_x'].toDouble(), comp['location_y'].toDouble()),
+            id: comp['id'].toString()
+          ));
+        }
+      });
+    } catch (e) {
+      _logger.severe('Failed to load components: $e');
+      _showErrorSnackBar('Failed to load components');
+    }
+  }
+
+  // Helper method to find component template by name
+  HydroComponent _findComponentByName(String name) {
+    return _components.firstWhere(
+      (c) => c.name == name,
+      orElse: () => _components.first,  // Fallback to first component if not found
+    );
+  }
+
+  // Shows error message to user
+  void _showErrorSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.red,
+      ),
+    );
+  }
+
+  // Updates component position in backend after drag
+  Future<void> _updateComponentPosition(pc.PlacedComponent component) async {
+    try {
+      await _apiService.updateComponentPosition(
+        component.id ?? '',  // ID might be null for new components
+        {
+          'x': component.offset.dx,
+          'y': component.offset.dy,
+        },
+      );
+    } catch (e) {
+      _logger.warning('Failed to update component position: $e');
+      _showErrorSnackBar('Failed to update component position');
+    }
+  }
+
+// Deletes a single component
+Future<void> _deleteComponent(int index) async {
+    final component = _placedComponents[index];
+    try {
+      final id = component.id;  // Store the ID
+      if (id != null) {        // Check if ID exists
+        await _apiService.deleteComponent(id);  // Pass the String ID
+      }
+      setState(() {
+        _placedComponents.removeAt(index);
+      });
+    } catch (e) {
+      _logger.severe('Failed to delete component: $e');
+      _showErrorSnackBar('Failed to delete component');
+    }
+}
+
+// Clears all components
+Future<void> _clearAllComponents() async {
+    try {
+      for (var component in _placedComponents) {
+        final id = component.id;  // Store the ID
+        if (id != null) {        // Check if ID exists
+          await _apiService.deleteComponent(id);  // Pass the String ID
+        }
+      }
+      setState(() {
+        _placedComponents.clear();
+      });
+    } catch (e) {
+      _logger.severe('Failed to clear components: $e');
+      _showErrorSnackBar('Failed to clear all components');
+    }
+}
 
   // Builds the visual representation of a placed component
   Widget _buildComponentWidget(pc.PlacedComponent component) {
@@ -96,11 +197,7 @@ class _ModelingInterfaceState extends State<ModelingInterface> {
           // Clear all components button
           IconButton(
             icon: const Icon(Icons.delete_outline),
-            onPressed: () {
-              setState(() {
-                _placedComponents.clear();
-              });
-            },
+            onPressed: _clearAllComponents,
             tooltip: 'Clear all components',
           ),
         ],
@@ -140,6 +237,8 @@ class _ModelingInterfaceState extends State<ModelingInterface> {
                                   component.offset += details.delta;
                                 });
                               },
+                              // Update backend when drag ends
+                              onPanEnd: (_) => _updateComponentPosition(component),
                               child: _buildComponentWidget(component),
                             ),
                           );
@@ -148,16 +247,36 @@ class _ModelingInterfaceState extends State<ModelingInterface> {
                     );
                   },
                   // Handle dropping new components onto the workspace
-                  onAcceptWithDetails: (details) {
-                    setState(() {
-                      _placedComponents.add(
-                        pc.PlacedComponent(
-                          component: details.data,
-                          offset: details.offset,
-                        ),
-                      );
-                    });
-                  },
+                  onAcceptWithDetails: (details) async {
+                    try {
+                      _logger.info('Drag details - offset: ${details.offset}');  // Debug print
+                      
+                      final newComponent = {
+                        'type': details.data.name.toUpperCase(),
+                        'location_x': details.offset.dx.toDouble(),  // Explicitly convert to double
+                        'location_y': details.offset.dy.toDouble(),  // Explicitly convert to double
+                        'properties': {},
+                        'project': 1
+                      };
+                      
+                      _logger.info('Component data being sent: $newComponent');  // Debug print
+                      
+                      final savedComponent = await _apiService.saveComponent(newComponent);
+                      
+                      setState(() {
+                        _placedComponents.add(
+                          pc.PlacedComponent(
+                            id: savedComponent['id'].toString(),
+                            component: details.data,
+                            offset: details.offset,
+                          ),
+                        );
+                      });
+                    } catch (e) {
+                      _logger.severe('Failed to save component: $e');
+                      _showErrorSnackBar('Failed to save component');
+                    }
+                  }
                 ),
               ],
             ),
@@ -177,7 +296,6 @@ class _ModelingInterfaceState extends State<ModelingInterface> {
                   itemCount: _placedComponents.length,
                   itemBuilder: (BuildContext context, int index) {
                     final component = _placedComponents[index];
-                    // List tile for each placed component
                     return ListTile(
                       leading: Icon(component.component.icon),
                       title: Text(component.component.name),
@@ -187,10 +305,13 @@ class _ModelingInterfaceState extends State<ModelingInterface> {
                       trailing: IconButton(
                         icon: const Icon(Icons.delete),
                         onPressed: () {
-                          setState(() {
-                            _placedComponents.removeAt(index);
+                          // Cache the context before the async gap
+                          final currentContext = context;
+                           _deleteComponent(index).then((_) {
+                            if (currentContext.mounted) {
+                              Navigator.pop(currentContext);
+                            }
                           });
-                          Navigator.pop(context);
                         },
                       ),
                     );

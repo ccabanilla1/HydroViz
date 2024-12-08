@@ -16,14 +16,3 @@ class HydroComponent {
   });
 }
 
-// Represents a component that has been placed on the workspace
-// Keeps track of both the component type and its position
-class PlacedComponent {
-  final HydroComponent component;  // Reference to the component template
-  Offset offset;                  // Current position on the workspace
-
-  PlacedComponent({
-    required this.component,
-    required this.offset,
-  });
-}
