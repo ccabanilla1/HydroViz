@@ -22,9 +22,8 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          // Top Blue Bar
           Container(
-            color: const Color(0xFF93C6E0), // Light blue color
+            color: const Color(0xFF93C6E0),
             padding: const EdgeInsets.symmetric(horizontal: 16),
             height: 80,
             child: Row(
@@ -33,7 +32,7 @@ class MainScreen extends StatelessWidget {
                 Row(
                   children: [
                     Image.asset(
-                      'assets/logo.png', // Replace with your logo path
+                      'lib/assets/hydrovizlogo.png',
                       height: 40,
                       width: 40,
                     ),
@@ -82,7 +81,7 @@ class MainScreen extends StatelessWidget {
                 // Sidebar
                 Container(
                   width: 80,
-                  color: const Color(0xFF93C6E0), // Light blue color
+                  color: const Color(0xFF93C6E0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -140,19 +139,16 @@ class MainScreen extends StatelessWidget {
                       const Padding(
                         padding: EdgeInsets.only(bottom: 16.0),
                         child: CircleAvatar(
-                          backgroundImage: AssetImage(
-                              'assets/profile.png'), // Replace with profile image
+                          backgroundImage: AssetImage('lib/assets/profile.png'),
                           radius: 20,
                         ),
                       ),
                     ],
                   ),
                 ),
-                // Main Content (Adjusted for Middle-Left Placement)
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 50, top: 50), // Add padding to position content
+                    padding: const EdgeInsets.only(left: 50, top: 50),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -214,7 +210,7 @@ class MainScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                // Walkthroughs Section (Right Side)
+                // Walkthroughs Section
                 Container(
                   width: 300,
                   color: Colors.grey[200],

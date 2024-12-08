@@ -17,15 +17,15 @@ class Error404 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF7EDE4), // Light beige background
+      backgroundColor: Color(0xFFF7EDE4),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // 404 Image
             Image.asset(
-              'assets/womp_womp.png', // Path to the image
-              width: 400, // Adjust size as needed
+              'lib/assets/womp_womp.png',
+              width: 400,
             ),
             const SizedBox(height: 16),
             // Page Not Found Text
@@ -34,7 +34,7 @@ class Error404 extends StatelessWidget {
               style: TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.bold,
-                color: Colors.brown, // Brown text color
+                color: Colors.brown,
               ),
             ),
             const SizedBox(height: 16),
@@ -51,7 +51,7 @@ class Error404 extends StatelessWidget {
               icon: const Icon(Icons.arrow_back, color: Colors.white),
               label: const Text("Return Home"),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFB7866E), // Brown button color
+                backgroundColor: const Color(0xFFB7866E),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 textStyle:

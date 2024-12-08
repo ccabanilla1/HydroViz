@@ -18,13 +18,13 @@ class DiscussionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF7EDE4), // Light beige background
+      backgroundColor: const Color(0xFFF7EDE4),
       body: Row(
         children: [
           // Sidebar
           Container(
             width: 250,
-            color: const Color(0xFF6C92BF), // Blue sidebar
+            color: const Color(0xFF6C92BF),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -63,7 +63,6 @@ class DiscussionPage extends StatelessWidget {
                     onTap: () {},
                   ),
                   const SizedBox(height: 32),
-                  // Recent Discussions
                   const Text(
                     "Recent Discussions",
                     style: TextStyle(
@@ -76,7 +75,6 @@ class DiscussionPage extends StatelessWidget {
                   SidebarTextLink(title: "Discussion Title"),
                   SidebarTextLink(title: "Discussion Title"),
                   const SizedBox(height: 32),
-                  // Your Posts
                   const Text(
                     "Your Posts",
                     style: TextStyle(
@@ -101,11 +99,9 @@ class DiscussionPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Top Navigation
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Back Arrow
                         IconButton(
                           icon: const Icon(Icons.arrow_back),
                           onPressed: () {
@@ -199,7 +195,6 @@ class DiscussionPage extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    // First Discussion Post with Comments and Input
                     PostCardWithComments(),
                     const SizedBox(height: 16),
                   ],
@@ -211,12 +206,11 @@ class DiscussionPage extends StatelessWidget {
           // Updates Section
           Container(
             width: 250,
-            margin: const EdgeInsets.only(
-                left: 16), // Add spacing from the main content
+            margin: const EdgeInsets.only(left: 16),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.white, // White background
-              borderRadius: BorderRadius.circular(16), // Rounded corners
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -378,7 +372,6 @@ class PostCardWithComments extends StatelessWidget {
             replies: [],
           ),
           const SizedBox(height: 16),
-          // Add New Comment
           Row(
             children: [
               const CircleAvatar(

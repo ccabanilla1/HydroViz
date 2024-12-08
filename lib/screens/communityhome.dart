@@ -359,12 +359,11 @@ class Communityhome extends StatelessWidget {
           // Updates Section
           Container(
             width: 250,
-            margin: const EdgeInsets.only(
-                left: 16), // Add spacing from the main content
+            margin: const EdgeInsets.only(left: 16),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.white, // White background
-              borderRadius: BorderRadius.circular(16), // Rounded corners
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
