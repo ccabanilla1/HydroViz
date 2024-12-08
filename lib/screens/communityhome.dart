@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
+import 'mainscreen.dart';
 import 'discussion.dart';
 import 'error404.dart';
 import 'settings_community.dart';

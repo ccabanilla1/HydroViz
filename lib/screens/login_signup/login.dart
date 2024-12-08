@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hydroviz/login_signup/login_Button.dart';
-import 'package:hydroviz/login_signup/login_TextField.dart';
-import 'package:hydroviz/main.dart';
+import 'package:hydroviz/screens/login_signup/login_Button.dart';
+import 'package:hydroviz/screens/login_signup/login_TextField.dart';
+import 'package:hydroviz/screens/mainscreen.dart';
 import 'package:hydroviz/utils/app_style.dart';
+import 'package:hydroviz/screens/login_signup/signup.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
@@ -67,18 +68,29 @@ class Login extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 30),
-          const LoginButton(
+          LoginButton(
             text: 'Sign In',
             paddingLT: 50,
             onTap: () => navigateToHome(context),
           ),
           const SizedBox(height: 30),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Not a member?'),
-              SizedBox(width: 4),
-              Text('Sign Up', style: TextStyle(color: Colors.blueAccent)),
+              const Text('Not a member?'),
+              const SizedBox(width: 4),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignUp()),
+                  );
+                },
+                child: const Text(
+                  'Sign Up',
+                  style: TextStyle(color: Colors.blueAccent),
+                ),
+              )
             ],
           )
         ],

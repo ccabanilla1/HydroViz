@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hydroviz/main.dart';
+import 'mainscreen.dart';
 
 void main() => runApp(HydroVizApp());
 
