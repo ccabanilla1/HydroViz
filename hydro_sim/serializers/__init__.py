@@ -4,7 +4,8 @@ from .physical_serializers import (
     AquiferPropertiesSerializer,
     FieldMeasurementSerializer,
     ProjectDetailSerializer,
-    WellDetailSerializer
+    WellDetailSerializer,
+    ComponentSerializer  # Add this
 )
 
 from .simulation_serializers import (
@@ -20,6 +21,7 @@ __all__ = [
     'FieldMeasurementSerializer',
     'ProjectDetailSerializer',
     'WellDetailSerializer',
+    'ComponentSerializer',  # Add this
     'SimulationModelSerializer',
     'SimulationResultSerializer',
     'SimulationModelDetailSerializer'

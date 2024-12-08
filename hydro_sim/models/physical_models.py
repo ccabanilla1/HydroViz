@@ -112,3 +112,32 @@ class FieldMeasurement(models.Model):
 
     def __str__(self):
         return f"Measurement {self.measurement_id} for Well {self.well_id}"
+    
+class Component(models.Model):
+    # Link to project
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='components')
+    
+    # Component type and position
+    type = models.CharField(max_length=50, choices=[
+        ('WELL', 'Well'),
+        ('RIVER', 'River'),
+        ('RECHARGE', 'Recharge'),
+        ('BOUNDARY', 'Boundary'),
+    ])
+    location_x = models.FloatField()
+    location_y = models.FloatField()
+    
+    # Component details
+    created_date = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
+    properties = models.JSONField(null=True, blank=True,
+        help_text="Additional component properties")
+    
+    class Meta:
+        indexes = [
+            models.Index(fields=['project', 'type']),
+            models.Index(fields=['location_x', 'location_y']),
+        ]
+
+    def __str__(self):
+        return f"{self.type} Component at ({self.location_x}, {self.location_y})"

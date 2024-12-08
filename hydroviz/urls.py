@@ -1,4 +1,3 @@
-# Main URL configuration for HydroViz app
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
@@ -11,30 +10,38 @@ from hydro_sim.views import (
     # Simulation views
     SimulationProjectViewSet,
     SimulationModelViewSet,
-    SimulationResultViewSet
+    SimulationResultViewSet,
+    # Add Components view
+    ComponentViewSet  # Make sure to import this
 )
 
-# Router for physical data (wells, measurements, etc.)
-physical_router = DefaultRouter()
-physical_router.register(r'projects', ProjectViewSet, basename='project')
-physical_router.register(r'wells', WellViewSet, basename='well')
-physical_router.register(r'aquifer-properties', AquiferPropertiesViewSet, basename='aquifer')
-physical_router.register(r'measurements', FieldMeasurementViewSet, basename='measurement')
+# Create a single router for all endpoints
+router = DefaultRouter()
 
-# Router for simulation data
-simulation_router = DefaultRouter()
-simulation_router.register(r'simulation-projects', SimulationProjectViewSet, basename='simulation-project')
-simulation_router.register(r'simulation-models', SimulationModelViewSet, basename='simulation-model')
-simulation_router.register(r'simulation-results', SimulationResultViewSet, basename='simulation-result')
+# Register physical data endpoints
+router.register(r'projects', ProjectViewSet, basename='project')
+router.register(r'wells', WellViewSet, basename='well')
+router.register(r'aquifer-properties', AquiferPropertiesViewSet, basename='aquifer')
+router.register(r'measurements', FieldMeasurementViewSet, basename='measurement')
+
+# Register simulation endpoints
+router.register(r'simulation-projects', SimulationProjectViewSet, basename='simulation-project')
+router.register(r'simulation-models', SimulationModelViewSet, basename='simulation-model')
+router.register(r'simulation-results', SimulationResultViewSet, basename='simulation-result')
+
+# Register components endpoint
+router.register(r'components', ComponentViewSet, basename='component')
 
 urlpatterns = [
-    # Django admin interface
+    # Django admin
     path('admin/', admin.site.urls),
     
-    # API endpoints
-    path('api/physical/', include(physical_router.urls)),
-    path('api/simulation/', include(simulation_router.urls)),
+    # API endpoints - all under /api/
+    path('api/', include(router.urls)),
     
-    # Authentication for browsable API
+    # Authentication
     path('api-auth/', include('rest_framework.urls')),
+    
+    # Include hydro_sim URLs
+    path('', include('hydro_sim.urls')),
 ]

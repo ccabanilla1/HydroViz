@@ -4,13 +4,12 @@ from pathlib import Path
 # Root directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Change this in production and keep it secret!
 SECRET_KEY = 'your-secret-key-here'
 
 # Set to False in production
 DEBUG = True
 
-# Add your domain names here in production
+# Add  domain names here in production
 ALLOWED_HOSTS = []
 
 # Apps installed in this project
@@ -69,7 +68,7 @@ DATABASES = {
         'NAME': 'hydroviz_db',
         'USER': 'postgres',
         'PASSWORD': '1234567',
-        'HOST': 'db',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
@@ -112,15 +111,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # API authentication and permissions
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny', # Change after dev
+    ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
 }
 
-# Cross-Origin Resource Sharing settings - Update for production!
-CORS_ALLOW_ALL_ORIGINS = True  # Restrict this in production
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
+
+# Cross-Origin Resource Sharing settings 
+CORS_ALLOW_ALL_ORIGINS = True  # change after dev finishes
 CORS_ALLOW_CREDENTIALS = True

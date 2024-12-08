@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models.physical_models import Project, Well, AquiferProperties, FieldMeasurement
+from ..models.physical_models import Project, Well, AquiferProperties, FieldMeasurement, Component
 
 # Basic project serializer
 class ProjectSerializer(serializers.ModelSerializer):
@@ -44,11 +44,21 @@ class FieldMeasurementSerializer(serializers.ModelSerializer):
         model = FieldMeasurement
         fields = '__all__'
 
+
+class ComponentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Component
+        fields = ['id', 'type', 'location_x', 'location_y', 'properties', 'project']
+        extra_kwargs = {
+            'properties': {'required': False},
+            'id': {'read_only': True}
+        }
+
 # Detailed project serializer with related data
 class ProjectDetailSerializer(serializers.ModelSerializer):
-    # Include full well and aquifer data
     wells = WellSerializer(many=True, read_only=True)
     aquifer_properties = AquiferPropertiesSerializer(many=True, read_only=True)
+    components = ComponentSerializer(many=True, read_only=True)  # Add this line
 
     class Meta:
         model = Project
@@ -63,3 +73,4 @@ class WellDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Well
         fields = '__all__'
+
