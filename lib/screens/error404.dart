@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hydroviz/main.dart';
+import 'package:hydroviz/screens/mainscreen.dart';
 
-void main() => runApp(HydroVizApp());
+void main() => runApp(const HydroVizApp());
 
 class HydroVizApp extends StatelessWidget {
+  const HydroVizApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
+import 'package:hydroviz/screens/mainscreen.dart';
 import 'discussion.dart';
 import 'error404.dart';
 import 'settings_community.dart';
