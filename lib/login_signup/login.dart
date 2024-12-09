@@ -1,15 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:hydroviz/login_signup/login_Button.dart';
-import 'package:hydroviz/login_signup/login_TextField.dart';
+import 'package:hydroviz/login_signup/login_button.dart';
+import 'package:hydroviz/login_signup/login_text_field.dart';
 import 'package:hydroviz/utils/app_style.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
 
 class Login extends StatelessWidget {
   Login({super.key});
-  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void hello(){
-    
+  Future<void> loginUser(BuildContext context) async{
+    var url = Uri.parse('http://0.0.0.0:8000/auth/login/');
+    try{
+      var response = await http.post(url, body: {
+        'email': emailController.text,
+        'password': passwordController.text,
+      });
+
+      if(response.statusCode == 200){
+        Navigator.pushNamed(context, '/mainscreen');
+      }
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
+    catch(e){
+      print('Error: $e' );
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -45,7 +62,7 @@ class Login extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(350, 0, 350, 0),
                     child: LoginTextfield(
-                      controller: usernameController,
+                      controller: emailController,
                       textHint: "Email",
                       hideText: false,
                     ) 
@@ -64,27 +81,42 @@ class Login extends StatelessWidget {
                   
                   const SizedBox(height: 20),
 
-                  const Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 350),
+                  Padding(
+                    padding:  const EdgeInsets.symmetric(horizontal: 350),
                     child:  Row(
                       
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(
-                          'Forgot Password?', 
-                          style: TextStyle()),
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.pushNamed(context, '/resetpassword');
+                          },
+                          child: const Text(
+                            'Forgot Password?', 
+                            style: TextStyle()),
+                        ),
                       ],
                     ),
                   ),
                   const SizedBox(height: 30),
-                  const LoginButton(text: 'Sign In', paddingLT: 50,),
+                  LoginButton(
+                    text: 'Sign In', 
+                    paddingLT: 50, 
+                    onTap: ()async{
+                      await loginUser(context);
+                    },),
                   const SizedBox(height: 30),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                       Text('Not a member?'),
-                       SizedBox(width: 4),
-                       Text('Sign Up', style: TextStyle(color: Colors.blueAccent)),
+                       const Text('Not a member?'),
+                       const SizedBox(width: 4),
+                       GestureDetector(
+                        onTap: (){
+                          Navigator.pushNamed(context, '/signup');},
+                        child: const Text(
+                          'Sign Up', 
+                          style: TextStyle(color: Colors.blueAccent))),
                     ],
                   )
                 ],

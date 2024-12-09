@@ -3,12 +3,13 @@ import 'communityhome.dart';
 import 'error404.dart';
 //import 'discussion.dart';
 
-void main() => runApp(HydroVizApp());
+void main() => runApp(const HydroVizApp());
 
 class HydroVizApp extends StatelessWidget {
+  const HydroVizApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: CSettingsPage(),
     );
@@ -16,6 +17,7 @@ class HydroVizApp extends StatelessWidget {
 }
 
 class CSettingsPage extends StatelessWidget {
+  const CSettingsPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,10 +85,10 @@ class CSettingsPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SidebarTextLink(title: "Discussion Title"),
-                  SidebarTextLink(title: "Discussion Title"),
-                  SidebarTextLink(title: "Discussion Title"),
-                  SizedBox(height: 32),
+                  const SidebarTextLink(title: "Discussion Title"),
+                  const SidebarTextLink(title: "Discussion Title"),
+                  const SidebarTextLink(title: "Discussion Title"),
+                  const SizedBox(height: 32),
                   // Your Posts
                   const Text(
                     "Your Posts",
@@ -96,9 +98,9 @@ class CSettingsPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SidebarTextLink(title: "Discussion Title"),
-                  SidebarTextLink(title: "Discussion Title"),
-                  SidebarTextLink(title: "Discussion Title"),
+                  const SidebarTextLink(title: "Discussion Title"),
+                  const SidebarTextLink(title: "Discussion Title"),
+                  const SidebarTextLink(title: "Discussion Title"),
                 ],
               ),
             ),
@@ -118,7 +120,7 @@ class CSettingsPage extends StatelessWidget {
                       children: [
                         // Back Arrow
                         IconButton(
-                          icon: Icon(Icons.arrow_back),
+                          icon: const Icon(Icons.arrow_back),
                           onPressed: () {
                             Navigator.pop(context);
                           },
@@ -174,7 +176,7 @@ class CSettingsPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     // Settings Categories (Tabs)
-                    Row(
+                    const Row(
                       children: [
                         SettingsTab(title: "Account", isActive: true),
                         SettingsTab(title: "Profile"),
@@ -187,7 +189,7 @@ class CSettingsPage extends StatelessWidget {
                     Divider(color: Colors.grey[300], thickness: 1),
                     const SizedBox(height: 16),
                     // Account Settings Details
-                    SettingsCategory(
+                    const SettingsCategory(
                       title: "General",
                       items: [
                         SettingsItem(title: "Email Address"),
@@ -197,14 +199,14 @@ class CSettingsPage extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    SettingsCategory(
+                    const SettingsCategory(
                       title: "Account Authorization",
                       items: [
                         SettingsItem(title: "Two-Factor Authentication"),
                       ],
                     ),
                     const SizedBox(height: 16),
-                    SettingsCategory(
+                    const SettingsCategory(
                       title: "Advanced",
                       items: [
                         SettingsItem(
@@ -229,7 +231,7 @@ class SidebarItem extends StatelessWidget {
   final String title;
   final VoidCallback? onTap;
 
-  SidebarItem({required this.icon, required this.title, this.onTap});
+  const SidebarItem({super.key, required this.icon, required this.title, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -253,9 +255,9 @@ class SidebarItem extends StatelessWidget {
 }
 
 class SidebarTextLink extends StatelessWidget {
+  
   final String title;
-
-  SidebarTextLink({required this.title});
+  const SidebarTextLink({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -273,7 +275,7 @@ class SettingsTab extends StatelessWidget {
   final String title;
   final bool isActive;
 
-  SettingsTab({required this.title, this.isActive = false});
+  const SettingsTab({super.key, required this.title, this.isActive = false});
 
   @override
   Widget build(BuildContext context) {
@@ -295,7 +297,7 @@ class SettingsCategory extends StatelessWidget {
   final String title;
   final List<SettingsItem> items;
 
-  SettingsCategory({required this.title, required this.items});
+  const SettingsCategory({super.key, required this.title, required this.items});
 
   @override
   Widget build(BuildContext context) {
@@ -320,7 +322,7 @@ class SettingsItem extends StatelessWidget {
   final String title;
   final bool isDestructive;
 
-  SettingsItem({required this.title, this.isDestructive = false});
+  const SettingsItem({super.key, required this.title, this.isDestructive = false});
 
   @override
   Widget build(BuildContext context) {

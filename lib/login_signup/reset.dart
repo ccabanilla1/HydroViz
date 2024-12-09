@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hydroviz/login_signup/login_Button.dart';
-import 'package:hydroviz/login_signup/login_TextField.dart';
+import 'package:hydroviz/login_signup/login_button.dart';
+import 'package:hydroviz/login_signup/login_text_field.dart';
 import 'package:hydroviz/utils/app_style.dart';
 
 class Reset extends StatelessWidget {
@@ -75,7 +75,8 @@ class Reset extends StatelessWidget {
               
                   
                   const SizedBox(height: 30),
-                  const LoginButton(text: 'Send reset Link', paddingLT: 50,),
+                  
+                  LoginButton(text: 'Send reset Link', paddingLT: 50,onTap: (){},),
                   const SizedBox(height: 30),
                   
                 ],
