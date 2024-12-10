@@ -1,20 +1,7 @@
 import 'package:flutter/material.dart';
 import 'communityhome.dart';
 import 'error404.dart';
-import 'package:hydroviz/sidebar_item.dart';
-//sidebar_item.dart
-void main() => runApp(const HydroVizApp());
-
-class HydroVizApp extends StatelessWidget {
-  const HydroVizApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: CSettingsPage(),
-    );
-  }
-}
+import 'package:hydroviz/widgets/sidebar_item.dart';
 
 class CSettingsPage extends StatelessWidget {
   const CSettingsPage({super.key});
@@ -85,9 +72,9 @@ class CSettingsPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SidebarTextLink(title: "Discussion Title"),
-                  const SidebarTextLink(title: "Discussion Title"),
-                  const SidebarTextLink(title: "Discussion Title"),
+                  SidebarTextLink(title: "Discussion Title"),
+                  SidebarTextLink(title: "Discussion Title"),
+                  SidebarTextLink(title: "Discussion Title"),
                   const SizedBox(height: 32),
                   // Your Posts
                   const Text(
@@ -98,9 +85,9 @@ class CSettingsPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SidebarTextLink(title: "Discussion Title"),
-                  const SidebarTextLink(title: "Discussion Title"),
-                  const SidebarTextLink(title: "Discussion Title"),
+                  SidebarTextLink(title: "Discussion Title"),
+                  SidebarTextLink(title: "Discussion Title"),
+                  SidebarTextLink(title: "Discussion Title"),
                 ],
               ),
             ),
@@ -226,51 +213,6 @@ class CSettingsPage extends StatelessWidget {
   }
 }
 
-class SidebarItem extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final VoidCallback? onTap;
-
-  const SidebarItem({super.key, required this.icon, required this.title, this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Row(
-          children: [
-            Icon(icon, color: Colors.white),
-            const SizedBox(width: 16),
-            Text(
-              title,
-              style: const TextStyle(color: Colors.white, fontSize: 16),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class SidebarTextLink extends StatelessWidget {
-  
-  final String title;
-  const SidebarTextLink({super.key, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      "- $title",
-      style: const TextStyle(
-        color: Colors.white,
-        fontSize: 14,
-      ),
-    );
-  }
-}
-
 class SettingsTab extends StatelessWidget {
   final String title;
   final bool isActive;
@@ -322,7 +264,8 @@ class SettingsItem extends StatelessWidget {
   final String title;
   final bool isDestructive;
 
-  const SettingsItem({super.key, required this.title, this.isDestructive = false});
+  const SettingsItem(
+      {super.key, required this.title, this.isDestructive = false});
 
   @override
   Widget build(BuildContext context) {

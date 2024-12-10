@@ -1,19 +1,6 @@
 import 'package:flutter/material.dart';
 import 'mainscreen.dart';
 
-void main() => runApp(const HydroVizApp());
-
-class HydroVizApp extends StatelessWidget {
-  const HydroVizApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Error404(),
-    );
-  }
-}
-
 class Error404 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

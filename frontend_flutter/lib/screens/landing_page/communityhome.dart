@@ -3,21 +3,9 @@ import 'mainscreen.dart';
 import 'error404.dart';
 import 'settings_community.dart';
 import '../../../widgets/post_card.dart';
-import '../../../widgets/sidebar_item.dart';
+import 'package:hydroviz/widgets/sidebar_item.dart';
 import 'package:hydroviz/services/post_service.dart';
 import '../../../widgets/updatenote.dart';
-
-void main() => runApp(HydroVizApp());
-
-class HydroVizApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Communityhome(),
-    );
-  }
-}
 
 class Communityhome extends StatefulWidget {
   @override

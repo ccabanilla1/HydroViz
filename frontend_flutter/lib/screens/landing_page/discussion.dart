@@ -1,20 +1,8 @@
 import 'package:flutter/material.dart';
 import 'communityhome.dart';
 import 'settings_community.dart';
-import '../../../widgets/sidebar_item.dart';
+import 'package:hydroviz/widgets/sidebar_item.dart';
 import '../../../widgets/updatenote.dart';
-
-void main() => runApp(HydroVizApp());
-
-class HydroVizApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: DiscussionPage(),
-    );
-  }
-}
 
 class DiscussionPage extends StatelessWidget {
   @override
