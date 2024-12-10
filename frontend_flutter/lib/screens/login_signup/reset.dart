@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hydroviz/screens/login_signup/login_Button.dart';
-import 'package:hydroviz/screens/login_signup/login_TextField.dart';
+import 'package:hydroviz/screens/login_signup/login_text_field.dart';
 import 'package:hydroviz/utils/app_style.dart';
 
 class Reset extends StatelessWidget {
@@ -12,7 +12,10 @@ class Reset extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HydroViz'),
+        title: const Text(
+          'HydroViz',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: AppColors.alternate,
       ),
       backgroundColor: AppColors.primaryBack,
@@ -64,12 +67,9 @@ class Reset extends StatelessWidget {
               )),
           const SizedBox(height: 30),
           LoginButton(
-            text: 'Sign Up',
+            text: 'Send reset Link',
             paddingLT: 50,
-            onTap: () {
-              //Needs logic
-              print("button tapped!");
-            },
+            onTap: () {},
           ),
           const SizedBox(height: 30),
         ],
