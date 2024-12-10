@@ -3,19 +3,7 @@ import 'mainscreen.dart';
 import 'discussion.dart';
 import 'error404.dart';
 import 'settings_community.dart';
-import '../widgets/post_card.dart';
-
-void main() => runApp(HydroVizApp());
-
-class HydroVizApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Communityhome(),
-    );
-  }
-}
+import '../../../widgets/post_card.dart';
 
 class SidebarItem extends StatelessWidget {
   final IconData icon;

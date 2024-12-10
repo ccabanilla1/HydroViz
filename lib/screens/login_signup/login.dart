@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydroviz/screens/login_signup/login_Button.dart';
 import 'package:hydroviz/screens/login_signup/login_TextField.dart';
-import 'package:hydroviz/screens/mainscreen.dart';
+import 'package:hydroviz/screens/landing_page/mainscreen.dart';
 import 'package:hydroviz/utils/app_style.dart';
 import 'package:hydroviz/screens/login_signup/signup.dart';
 

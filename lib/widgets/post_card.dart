@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/discussion.dart';
+import '../screens/landing_page/discussion.dart';
 
 class PostCard extends StatelessWidget {
   final String title;
