@@ -36,7 +36,11 @@ class SignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HydroViz'),
+        title: const Text(
+          'HydroViz',
+          style: TextStyle(
+            color: Colors.white
+          ),),
         backgroundColor: AppColors.alternate,
       ),
       backgroundColor: AppColors.primaryBack,
