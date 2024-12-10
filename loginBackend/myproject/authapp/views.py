@@ -48,5 +48,14 @@ def login(request):
 
 @api_view(['POST'])
 def resetPassword(request):
-    email = request.data['email']
+    credential = request.data  #credentials from the user
+    userEmail = credential.get('email')
+
+    #if account already exists then the user should Login
+    if((HydroVizUser.objects.filter(email = userEmail).exists())):
+        return Response({'message': 'Email Sent Successfully'}, status = status.HTTP_200_OK)
+    
+    #let new user create an account
+    else:
+        return Response({'error': 'Account not found'}, status = status.HTTP_404_NOT_FOUND)
 

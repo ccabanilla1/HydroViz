@@ -5,16 +5,28 @@ import 'package:hydroviz/utils/app_style.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   SignUp({super.key});
+
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
+
   final firstNameController = TextEditingController();
+
   final lastNameController = TextEditingController();
+
   final confirmPasswordController = TextEditingController();
+  
+  String responseMessage = '';
 
   Future<void> signUpUser(BuildContext context) async {
-    var url = Uri.parse('http://0.0.0.0:8000/auth/signup/');
+    var url = Uri.parse('http://127.0.0.1:8000/auth/signup/');
     try {
       var response = await http.post(url, body: {
         'email': emailController.text,
@@ -22,6 +34,11 @@ class SignUp extends StatelessWidget {
         'firstName': firstNameController.text,
         'lastName': lastNameController.text
       });
+
+      setState(() {
+        responseMessage = response.body;
+      });
+      
       if (response.statusCode == 201) {
         Navigator.pushNamed(context, '/login');
       }
@@ -59,7 +76,16 @@ class SignUp extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 350),
+                child: Text(
+                  responseMessage, 
+                  style: const TextStyle(color: Colors.red), 
+                  textAlign: TextAlign.center,
+                )),
+            const SizedBox(height: 20),
+
             Padding(
                 padding: const EdgeInsets.fromLTRB(350, 0, 350, 0),
                 child: LoginTextfield(

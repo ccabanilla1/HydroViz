@@ -5,19 +5,29 @@ import 'package:hydroviz/utils/app_style.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-class Login extends StatelessWidget {
-  Login({super.key});
+class Login extends StatefulWidget {
+  const Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
+  String responseMessage = '';
 
   Future<void> loginUser(BuildContext context) async {
-    var url = Uri.parse('http://0.0.0.0:8000/auth/login/');
+    var url = Uri.parse('http://127.0.0.1:8000/auth/login/');
     try {
       var response = await http.post(url, body: {
         'email': emailController.text,
         'password': passwordController.text,
       });
-
+      setState(() {
+        responseMessage = response.body;
+      });
       if (response.statusCode == 200) {
         Navigator.pushNamed(context, '/mainscreen');
       }
@@ -54,7 +64,15 @@ class Login extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 15),
+          Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 350),
+                child: Text(
+                  responseMessage, 
+                  style: const TextStyle(color: Colors.red), 
+                  textAlign: TextAlign.center,
+                )),
+          const SizedBox(height: 20),
           Padding(
               padding: const EdgeInsets.fromLTRB(350, 0, 350, 0),
               child: LoginTextfield(
@@ -63,6 +81,7 @@ class Login extends StatelessWidget {
                 hideText: false,
               )),
           const SizedBox(height: 40),
+          
           Padding(
               padding: const EdgeInsets.fromLTRB(350, 0, 350, 0),
               child: LoginTextfield(
@@ -78,7 +97,7 @@ class Login extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, '/resetpassword');
+                    Navigator.pushNamed(context, '/reset-password');
                   },
                   child: const Text('Forgot Password?', style: TextStyle()),
                 ),

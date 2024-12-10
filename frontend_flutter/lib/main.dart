@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hydroviz/screens/login_signup/reset.dart';
+import 'package:hydroviz/screens/login_signup/signup.dart';
 import 'screens/login_signup/login.dart';
 import 'screens/landing_page/communityhome.dart';
 import 'screens/landing_page/mainscreen.dart';
@@ -25,8 +27,15 @@ class HydroViz extends StatelessWidget {
         switch (settings.name) {
           case '/login':
             return MaterialPageRoute(builder: (context) => Login());
+
+          case '/signup':
+            return MaterialPageRoute(builder: (context) => SignUp());
+
+          case '/reset-password':
+            return MaterialPageRoute(builder: (context) => const Reset());
+
           case '/mainscreen':
-            return MaterialPageRoute(builder: (context) => MainScreen());
+            return MaterialPageRoute(builder: (context) => const MainScreen());
           case '/modeling':
             final projectId = settings.arguments as int?;
             return MaterialPageRoute(
