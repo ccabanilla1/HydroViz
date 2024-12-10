@@ -1,45 +1,26 @@
 import 'package:flutter/material.dart';
-import 'screens/login_signup/login.dart';
-import 'screens/landing_page/communityhome.dart';
-import 'screens/landing_page/mainscreen.dart';
-import 'screens/workspace/modeling_interface.dart';
+import 'package:hydroviz/login_signup/login.dart';
+import 'package:hydroviz/login_signup/reset.dart';
+import 'package:hydroviz/login_signup/signup.dart';
+import 'package:hydroviz/screens/mainscreen.dart';
 
 void main() {
-  runApp(HydroViz());
+  runApp(MyApp());
 }
 
-class HydroViz extends StatelessWidget {
-  HydroViz({super.key});
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      home: Login(),
       debugShowCheckedModeBanner: false,
-      title: 'HydroViz',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.grey[200],
-      ),
-      initialRoute: '/login',
-      onGenerateRoute: (settings) {
-        switch (settings.name) {
-          case '/login':
-            return MaterialPageRoute(builder: (context) => Login());
-          case '/mainscreen':
-            return MaterialPageRoute(builder: (context) => MainScreen());
-          case '/modeling':
-            final projectId = settings.arguments as int?;
-            return MaterialPageRoute(
-              builder: (context) => ModelingInterface(
-                projectId: projectId ?? 1, 
-              ),
-            );
-          case '/community':
-            return MaterialPageRoute(builder: (context) => Communityhome());
-          default:
-            return MaterialPageRoute(builder: (context) => Login());
-        }
+      routes: {
+        '/login':(context) => Login(),
+        '/signup':(context) => SignUp(),
+        '/mainscreen':(context) => const  MainScreen(),
+        '/resetpassword':(context) => Reset()
       },
     );
   }
 }
+
