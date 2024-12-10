@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'communityhome.dart';
 import 'settings_community.dart';
+import 'package:hydroviz/widgets/sidebar_item.dart';
+import 'package:hydroviz/widgets/updatenote.dart';
 
 void main() => runApp(HydroVizApp());
 
@@ -244,59 +246,6 @@ class DiscussionPage extends StatelessWidget {
   }
 }
 
-class SidebarItem extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final VoidCallback? onTap;
-
-  SidebarItem({required this.icon, required this.title, this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Row(
-          children: [
-            Icon(icon, color: Colors.white),
-            const SizedBox(width: 16),
-            Text(
-              title,
-              style: const TextStyle(color: Colors.white, fontSize: 16),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class SidebarTextLink extends StatelessWidget {
-  final String title;
-
-  SidebarTextLink({required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => DiscussionPage()),
-        );
-      },
-      child: Text(
-        "- $title",
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 14,
-        ),
-      ),
-    );
-  }
-}
-
 class PostCardWithComments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -430,36 +379,6 @@ class CommentWidget extends StatelessWidget {
           const SizedBox(height: 4),
           Text(text),
           for (var reply in replies) reply,
-        ],
-      ),
-    );
-  }
-}
-
-class UpdateNote extends StatelessWidget {
-  final String title;
-  final String description;
-
-  UpdateNote({required this.title, required this.description});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(
-            description,
-            style: const TextStyle(fontSize: 12, color: Colors.grey),
-          ),
         ],
       ),
     );

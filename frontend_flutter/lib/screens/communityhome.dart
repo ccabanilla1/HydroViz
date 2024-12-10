@@ -4,6 +4,9 @@ import 'discussion.dart';
 import 'error404.dart';
 import 'settings_community.dart';
 import '../widgets/post_card.dart';
+import 'package:hydroviz/widgets/sidebar_item.dart';
+import 'package:hydroviz/api/post_service.dart';
+import 'package:hydroviz/widgets/updatenote.dart';
 
 void main() => runApp(HydroVizApp());
 
@@ -17,78 +20,43 @@ class HydroVizApp extends StatelessWidget {
   }
 }
 
-class SidebarItem extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final VoidCallback? onTap;
-  final Color? iconColor;
-  final TextStyle? textStyle;
-
-  const SidebarItem({
-    Key? key,
-    required this.icon,
-    required this.title,
-    this.onTap,
-    this.iconColor = Colors.white,
-    this.textStyle = const TextStyle(color: Colors.white, fontSize: 16),
-  }) : super(key: key);
-
+class Communityhome extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Semantics(
-      label: "Sidebar item: $title",
-      button: true,
-      child: InkWell(
-        onTap: onTap ?? () {}, // Default to no-op if onTap is null
-        splashColor: Colors.grey.withOpacity(0.3), // Ripple effect
-        highlightColor: Colors.grey.withOpacity(0.1), // Pressed color
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Row(
-            children: [
-              Icon(icon, color: iconColor),
-              const SizedBox(width: 16),
-              Text(title, style: textStyle),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  _CommunityhomeState createState() => _CommunityhomeState();
 }
 
-class SidebarTextLink extends StatelessWidget {
-  final String title;
-  final VoidCallback? onTap; // Optional custom action
-
-  const SidebarTextLink({Key? key, required this.title, this.onTap})
-      : super(key: key);
+class _CommunityhomeState extends State<Communityhome> {
+  late Future<List<dynamic>> _posts; // Future to fetch posts
+  final TextEditingController _postController =
+      TextEditingController(); // Controller for post creation
 
   @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap ??
-          () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => DiscussionPage()),
-            );
-          },
-      splashColor: Colors.grey.withOpacity(0.3), // Add ripple effect
-      child: Text(
-        "- $title",
-        style: const TextStyle(color: Colors.white, fontSize: 14),
-      ),
-    );
+  void initState() {
+    super.initState();
+    _posts = fetchPosts(); // Fetch posts from the Django backend
   }
-}
 
-class Communityhome extends StatelessWidget {
+  // Function to handle post creation
+  Future<void> _createPost(String content) async {
+    try {
+      await createPost(
+          "Anonymous", content); // Create post with title 'Anonymous'
+      setState(() {
+        _posts = fetchPosts(); // Refresh posts after creation
+      });
+      _postController.clear(); // Clear the text field
+    } catch (e) {
+      print('Error creating post: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF7EDE4), // Light beige background
       body: Row(
+        crossAxisAlignment:
+            CrossAxisAlignment.start, // Align children to the top
         children: [
           // Sidebar
           Container(
@@ -99,7 +67,6 @@ class Communityhome extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Logo
                   const Text(
                     "HydroViz",
                     style: TextStyle(
@@ -109,40 +76,31 @@ class Communityhome extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 32),
-                  // Navigation links
                   SidebarItem(
                     icon: Icons.home,
                     title: "Home",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Communityhome()),
-                      );
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Communityhome()),
+                    ),
                   ),
                   SidebarItem(
                     icon: Icons.topic,
                     title: "Topics",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Error404()),
-                      );
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Error404()),
+                    ),
                   ),
                   SidebarItem(
                     icon: Icons.trending_up,
                     title: "Trending",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Error404()),
-                      );
-                    },
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Error404()),
+                    ),
                   ),
                   const SizedBox(height: 32),
-                  // Recent Discussions
                   const Text(
                     "Recent Discussions",
                     style: TextStyle(
@@ -152,11 +110,10 @@ class Communityhome extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  SidebarTextLink(title: "Discussion Title"),
-                  SidebarTextLink(title: "Discussion Title"),
-                  SidebarTextLink(title: "Discussion Title"),
+                  SidebarTextLink(title: "Discussion Title 1"),
+                  SidebarTextLink(title: "Discussion Title 2"),
+                  SidebarTextLink(title: "Discussion Title 3"),
                   const SizedBox(height: 32),
-                  // Your Posts
                   const Text(
                     "Your Posts",
                     style: TextStyle(
@@ -166,14 +123,13 @@ class Communityhome extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  SidebarTextLink(title: "Discussion Title"),
-                  SidebarTextLink(title: "Discussion Title"),
-                  SidebarTextLink(title: "Discussion Title"),
+                  SidebarTextLink(title: "Post Title 1"),
+                  SidebarTextLink(title: "Post Title 2"),
+                  SidebarTextLink(title: "Post Title 3"),
                 ],
               ),
             ),
           ),
-
           // Main Content
           Expanded(
             child: SingleChildScrollView(
@@ -186,7 +142,6 @@ class Communityhome extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Back Arrow
                         IconButton(
                           icon: const Icon(Icons.arrow_back),
                           onPressed: () {
@@ -197,7 +152,6 @@ class Communityhome extends StatelessWidget {
                             );
                           },
                         ),
-                        // Search Bar
                         Container(
                           width: 300,
                           height: 40,
@@ -217,7 +171,6 @@ class Communityhome extends StatelessWidget {
                             ],
                           ),
                         ),
-                        // User Profile with Dropdown
                         DropdownButtonHideUnderline(
                           child: DropdownButton<String>(
                             icon: const Row(
@@ -299,6 +252,7 @@ class Communityhome extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           TextField(
+                            controller: _postController,
                             decoration: InputDecoration(
                               hintText: "What's on your mind?",
                               border: OutlineInputBorder(
@@ -307,58 +261,61 @@ class Communityhome extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Row(
-                            children: [
-                              ElevatedButton.icon(
-                                onPressed: () {},
-                                icon: const Icon(Icons.photo),
-                                label: const Text("Gallery"),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFFB7866E),
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: Text("Post"),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF6A994E),
-                                ),
-                              ),
-                            ],
+                          ElevatedButton(
+                            onPressed: () {
+                              final content = _postController.text.trim();
+                              if (content.isNotEmpty) {
+                                _createPost(content);
+                              }
+                            },
+                            child: const Text("Post"),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF6A994E),
+                            ),
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 16),
                     // Posts Section
-                    const PostCard(
-                      title: "Discussion Title 1",
-                      description: "Lorem Ipsum is simply dummy text.",
-                      likes: 321,
-                      comments: 20,
-                    ),
-                    const PostCard(
-                      title: "Discussion Title 2",
-                      description: "Lorem Ipsum is industry dummy text.",
-                      likes: 150,
-                      comments: 12,
-                    ),
-                    const PostCard(
-                      title: "Discussion Title 3",
-                      description: "Dummy text used in the printing industry.",
-                      likes: 200,
-                      comments: 18,
+                    FutureBuilder<List<dynamic>>(
+                      future: _posts,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        } else if (snapshot.hasError) {
+                          return Center(
+                            child: Text('Error: ${snapshot.error}'),
+                          );
+                        } else if (!snapshot.hasData ||
+                            snapshot.data!.isEmpty) {
+                          return const Center(
+                              child: Text('No posts available.'));
+                        } else {
+                          final posts = snapshot.data!;
+                          return Column(
+                            children: posts.map((post) {
+                              return PostCard(
+                                title: post['title'],
+                                description: post['content'],
+                                likes: 0,
+                                comments: 0,
+                              );
+                            }).toList(),
+                          );
+                        }
+                      },
                     ),
                   ],
                 ),
               ),
             ),
           ),
-
-          // Updates Section
+          // Update Notes Section (on the right)
           Container(
-            width: 250,
+            width: 300,
             margin: const EdgeInsets.only(left: 16),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -383,10 +340,6 @@ class Communityhome extends StatelessWidget {
                 UpdateNote(
                   title: "Update 2",
                   description: "Description for the second update.",
-                ),
-                UpdateNote(
-                  title: "Update 3",
-                  description: "Description for the third update.",
                 ),
               ],
             ),

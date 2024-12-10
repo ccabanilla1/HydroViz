@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'communityhome.dart';
 import 'error404.dart';
+import 'package:hydroviz/widgets/sidebar_item.dart';
 
 void main() => runApp(HydroVizApp());
 
@@ -218,51 +219,6 @@ class CSettingsPage extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class SidebarItem extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final VoidCallback? onTap;
-
-  SidebarItem({required this.icon, required this.title, this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Row(
-          children: [
-            Icon(icon, color: Colors.white),
-            const SizedBox(width: 16),
-            Text(
-              title,
-              style: const TextStyle(color: Colors.white, fontSize: 16),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class SidebarTextLink extends StatelessWidget {
-  final String title;
-
-  SidebarTextLink({required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      "- $title",
-      style: const TextStyle(
-        color: Colors.white,
-        fontSize: 14,
       ),
     );
   }
